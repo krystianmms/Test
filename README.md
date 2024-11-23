@@ -1,7 +1,7 @@
 # metoda Monte Carlo (obliczanie przybliżonej wartości liczby π, symulacja ruchów Browna) 
 
 ## 1. Co to jest?
-Metoda Monte Carlo została opracowana między innymi przez polskiego naukowca Stanisława Ulama oraz węgiersko — amerykańskiego naukowca Johna von Neumanna. Wykorzystano ją podczas prac nad bombą jądrową w celu symulacji procesu rozpadu jąder cząsteczek. Proces był na tyle skomplikowany, że zastosowanie klasycznych modeli obliczeniowych nie zdawało egzaminu.
+Metoda Monte Carlo (MC) została opracowana między innymi przez polskiego naukowca Stanisława Ulama oraz węgiersko — amerykańskiego naukowca Johna von Neumanna. Wykorzystano ją podczas prac nad bombą jądrową w celu symulacji procesu rozpadu jąder cząsteczek. Proces był na tyle skomplikowany, że zastosowanie klasycznych modeli obliczeniowych nie zdawało egzaminu.
 
 Metoda polega na przeprowadzeniu procesu w losowy sposób, zakładając, że po wystarczająco dużej liczbie prób otrzymamy wynik zbliżony do rzeczywistego.
 
@@ -111,8 +111,119 @@ for _ in range(num_points):
 
 Wizualizacja - https://www.youtube.com/shorts/Vm_UlcS4FJE
 
+**Idea** - Ruch Browna jest modelem losowym, który opisuje zmianę pozycji cząsteczki jako sumę drobnych, przypadkowych kroków.
 
+### Implementacja w Pythonie
 
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def simulate_brownian_motion(steps, delta_t=1, scale=1):
+    # Początkowe położenie
+    x, y = 0, 0
+    positions = [(x, y)]
+    
+    for _ in range(steps):
+        # Wygeneruj losowe zmiany pozycji (Gaussowskie)
+        dx = np.random.normal(loc=0, scale=scale * np.sqrt(delta_t))
+        dy = np.random.normal(loc=0, scale=scale * np.sqrt(delta_t))
+        x += dx
+        y += dy
+        positions.append((x, y))
+    
+    return positions
+
+# Symulacja i wizualizacja
+steps = 500
+positions = simulate_brownian_motion(steps)
+x_vals, y_vals = zip(*positions)
+
+plt.figure(figsize=(8, 8))
+plt.plot(x_vals, y_vals, marker="o", markersize=2, linestyle="-")
+plt.title("Symulacja ruchów Browna")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.gca().set_aspect('equal', adjustable='box')
+plt.show()
+```
+### **Jednak** po wykananiu kilku prób można dość do wniosku że powinna istnieć zalerzność w tego typu ruchach. Stosując metodę MC możemy sprawdzić na jakiej podstawie to działa.
+
+#### Program badający ruchy Browna
+``` python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def brownian_x_experiment(trials, steps, delta_t=1, scale=1):
+    final_x_positions = []
+
+    for _ in range(trials):
+        x = 0
+        for _ in range(steps):
+            dx = np.random.normal(loc=0, scale=scale * np.sqrt(delta_t))
+            x += dx
+        # Zapisz końcowe położenie na osi x
+        final_x_positions.append(x)
+
+    return final_x_positions
+
+# Parametry eksperymentu
+trials = 10_000  # Liczba prób
+steps = 100  # Liczba kroków w każdej próbie
+final_x_positions = brownian_x_experiment(trials, steps)
+
+# Wizualizacja wyników
+plt.figure(figsize=(10, 6))
+plt.hist(final_x_positions, bins=30, color="skyblue", edgecolor="black")
+plt.title(f"Wynik eksperymentu dla {trials} prób")
+plt.xlabel("Końcowe położenie na osi X")
+plt.ylabel("Liczba zakończonych prób dla danej pozycji")
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show()
+```
+#### Efekt:
+![image](https://github.com/user-attachments/assets/81c80df7-d15b-43c3-8ffb-77f274b4cedf)
+
+Przeprowadzony eksperyment to nic innego jak puszczone kulki na desce Galtona. Kulka
+zaczyna swoją wędrówkę od góry, a następnie natrafia na przeszkodę, która powoduje jej
+ruch w lewo lub w prawo z jednakowym prawdopodobieństwem.
+
+**Deska Galtona:**
+
+![image](https://github.com/user-attachments/assets/e0554a3b-b8de-4b78-ae80-c1b49f2017ed)
+
+Eksperyment wizualizuje rozkład dwumianowy (w Polsce zwany także rozkładem
+Bernoulliego), który w nieskończoności dąży do rozkładu normalnego, znanego jako
+rozkład Gaussa.
+
+Wykorzystując pozyskaną wiedzę, przekształcamy początkowy program program aby przypominał on bardziej deskę Galton (tak aby wartość pruszała się tylko w górę lub w dół otrzymujemy).
+
+**Przykłady**:
+
+1. ![image](https://github.com/user-attachments/assets/754327f8-b66f-4abd-8fe5-836193409288)
+
+2. ![image](https://github.com/user-attachments/assets/df9c0247-abf5-4b94-a50b-3cc283fe85ab)
+
+3. ![image](https://github.com/user-attachments/assets/62385027-fa96-4f02-baa6-003c0130e040)
+
+Czy przedstawine wykresy nie kojarzą sie przypadkiem z giełdą?
+
+#### W taki oto sposób z chaotycznych ruchów pyłków kwaitów w wodzie udało nam się udowadnić tezę rozkładu naturalnego oraz stowarzyć symulator wykresów giełdowych.
+
+---
+
+## 4. Zadania:
+ - Samdzielnie zbadaj czy metoda MC jest skutczna w szacowaniu liczby π.
+ - Zbadaj czy metoda szcowania Monte Carlo jest szybsza od dokłądnych obliczeń matematycznych.
+ - W jakich przypadkach metoda ta bedzię skrajnie nie właściwa?
+ - Podaj przykład innych znanych wykresów które kojarzą ci się z efektem badania ruchów Browna.
+
+--- 
+
+## 5. Dodatkowy materiał:
+- Wikipedia - https://pl.wikipedia.org/wiki/Metoda_Monte_Carlo
+- Szacowanie liczby π - https://www.mathematica.pl/?przyblizenie-liczby-pi-metoda-monte-carlo.,191
+- Symulacja ruchów Browna - https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwi5loGu0vKJAxWQKRAIHTpTMUIQFnoECA0QAQ&url=https%3A%2F%2Fzpe.gov.pl%2Fpdf%2FPOYhAftXy&usg=AOvVaw0qUAwGGaECmmVo2xHqnFf_&opi=89978449
   
 
 
