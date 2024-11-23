@@ -213,10 +213,10 @@ Czy przedstawione wykresy nie kojarzą się przypadkiem z giełdą?
 ---
 
 ## 4. Zadania:
--Samodzielnie zbadaj, czy metoda Monte Carlo jest skuteczna w szacowaniu liczby π.
--Zbadaj, czy metoda szacowania Monte Carlo jest szybsza od dokładnych obliczeń matematycznych.
--W jakich przypadkach metoda ta będzie skrajnie niewłaściwa?
--Podaj przykład innych znanych wykresów, które kojarzą się z efektem badania ruchów Browna.
+- Samodzielnie zbadaj, czy metoda Monte Carlo jest skuteczna w szacowaniu liczby π.
+- Zbadaj, czy metoda szacowania Monte Carlo jest szybsza od dokładnych obliczeń matematycznych.
+- W jakich przypadkach metoda ta będzie skrajnie niewłaściwa?
+- Podaj przykład innych znanych wykresów, które kojarzą się z efektem badania ruchów Browna.
 
 --- 
 
