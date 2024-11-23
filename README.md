@@ -1,4 +1,4 @@
-# metoda Monte Carlo (obliczanie przybliżonej wartości liczby π, symulacja ruchów Browna) 
+# Metoda Monte Carlo (obliczanie przybliżonej wartości liczby π, symulacja ruchów Browna) 
 
 ## 1. Co to jest?
 Metoda Monte Carlo (MC) została opracowana między innymi przez polskiego naukowca Stanisława Ulama oraz węgiersko — amerykańskiego naukowca Johna von Neumanna. Wykorzystano ją podczas prac nad bombą jądrową w celu symulacji procesu rozpadu jąder cząsteczek. Proces był na tyle skomplikowany, że zastosowanie klasycznych modeli obliczeniowych nie zdawało egzaminu.
@@ -7,7 +7,7 @@ Metoda polega na przeprowadzeniu procesu w losowy sposób, zakładając, że po 
 
 ### Np:
 ![POL_województwo_łódzkie_1950](https://github.com/user-attachments/assets/a422d397-c5e3-40e2-a69f-11f41a6b70fd)
-Na obrazku przedstawiono obszar Polski z podziałem na województwa. Losowo umieszczono 84 punktów z czego 6 z nich znajduje się w województwie Łódzkim. Szacując metodą Monte Carlo możemy stwierdzić iż województwo Łódzkie stanowi 6/84 (około 7%) powieszni Polski. Czyli 6 / 84 x 322 575 km^2 = 23 041 km^2. Prawdziwa powieszchnia województwa łódzkiego jest jednak równa 18 219 km^2. 
+Na obrazku przedstawiono obszar Polski z podziałem na województwa. Losowo umieszczono 84 punkty, z czego 6 z nich znajduje się w województwie Łódzkim. Szacując metodą Monte Carlo, możemy stwierdzić, iż województwo Łódzkie stanowi 6/84 (około 7%) powierzchni Polski. Czyli 6 / 84 x 322 575 km² = 23 041 km². Prawdziwa powierzchnia województwa łódzkiego jest jednak równa 18 219 km².
 ### Zalety:
 - Prostota
 - Szybkość w otrzymywaniu wyniku
@@ -21,7 +21,7 @@ Na obrazku przedstawiono obszar Polski z podziałem na województwa. Losowo umie
 - przybliżenie π można obliczyć:
   
   **π = 4 x liczba punktów w okregu / liczba wszystkich punktów** 
-- Video wyjaśniające jak metoda Monte Carlo może w łątwy sposób znaleźć liczbe π.
+- Wideo wyjaśniające, jak metoda Monte Carlo może w łatwy sposób znaleźć liczbę π:
   https://www.youtube.com/watch?v=ELetCV_wX_c
   
 ### Implementacja w Pythonie
@@ -147,7 +147,7 @@ plt.ylabel("y")
 plt.gca().set_aspect('equal', adjustable='box')
 plt.show()
 ```
-### **Jednak** po wykananiu kilku prób można dość do wniosku że powinna istnieć zalerzność w tego typu ruchach. Stosując metodę MC możemy sprawdzić na jakiej podstawie to działa.
+### Jednak po wykonaniu kilku prób można dojść do wniosku, że powinna istnieć zależność w tego typu ruchach. Stosując metodę MC, możemy sprawdzić, na jakiej podstawie to działa.
 
 #### Program badający ruchy Browna
 ``` python
@@ -196,7 +196,7 @@ Eksperyment wizualizuje rozkład dwumianowy (w Polsce zwany także rozkładem
 Bernoulliego), który w nieskończoności dąży do rozkładu normalnego, znanego jako
 rozkład Gaussa.
 
-Wykorzystując pozyskaną wiedzę, przekształcamy początkowy program program aby przypominał on bardziej deskę Galton (tak aby wartość pruszała się tylko w górę lub w dół otrzymujemy).
+Wykorzystując pozyskaną wiedzę, przekształcamy początkowy program, aby przypominał on bardziej deskę Galtona (tak, aby wartość poruszała się tylko w górę lub w dół).
 
 **Przykłady**:
 
@@ -206,17 +206,17 @@ Wykorzystując pozyskaną wiedzę, przekształcamy początkowy program program a
 
 3. ![image](https://github.com/user-attachments/assets/62385027-fa96-4f02-baa6-003c0130e040)
 
-Czy przedstawine wykresy nie kojarzą sie przypadkiem z giełdą?
+Czy przedstawione wykresy nie kojarzą się przypadkiem z giełdą?
 
-#### W taki oto sposób z chaotycznych ruchów pyłków kwaitów w wodzie udało nam się udowadnić tezę rozkładu naturalnego oraz stowarzyć symulator wykresów giełdowych.
+#### W taki oto sposób, z chaotycznych ruchów pyłków kwiatów w wodzie, udało nam się udowodnić tezę rozkładu naturalnego oraz stworzyć symulator wykresów giełdowych.
 
 ---
 
 ## 4. Zadania:
- - Samdzielnie zbadaj czy metoda MC jest skutczna w szacowaniu liczby π.
- - Zbadaj czy metoda szcowania Monte Carlo jest szybsza od dokłądnych obliczeń matematycznych.
- - W jakich przypadkach metoda ta bedzię skrajnie nie właściwa?
- - Podaj przykład innych znanych wykresów które kojarzą ci się z efektem badania ruchów Browna.
+-Samodzielnie zbadaj, czy metoda Monte Carlo jest skuteczna w szacowaniu liczby π.
+-Zbadaj, czy metoda szacowania Monte Carlo jest szybsza od dokładnych obliczeń matematycznych.
+-W jakich przypadkach metoda ta będzie skrajnie niewłaściwa?
+-Podaj przykład innych znanych wykresów, które kojarzą się z efektem badania ruchów Browna.
 
 --- 
 
